@@ -4,6 +4,8 @@
 # include <unistd.h>
 # include <stdio.h>
 
+void		start_game(void);
+void		end_game(void);
 void		draw_board(void);
 void		insert_onto_stack(int col, char piece);
 unsigned char	set_player_turn(unsigned char player);
