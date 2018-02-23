@@ -1,6 +1,6 @@
 #include "match4.h"
 
-char *ERR_INVALID_MOVE = "Invalid Move.\n";
+char *ERR_INVALID_MOVE = "Invalid Move.\n\0";
 
 char GAME_BOARD[6][7] = {
 			{0, 0, 0, 0, 0, 0, 0},
@@ -78,7 +78,7 @@ void	insert_onto_stack(int col, char piece)
 	
 	if (top_of_row < 0 || top_of_row > 5 || col < 0 || col > 6)
 	{
-		printf(ERR_INVALID_MOVE);
+		printf("\n%s", ERR_INVALID_MOVE);
 		set_player_turn(get_next_player_turn());	
 	}
 	else
