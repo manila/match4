@@ -76,7 +76,7 @@ void	insert_onto_stack(int col, char piece)
 {
 	int top_of_row = get_top_of_stack(col);
 	
-	if (top_of_row < 0 && col < 0 && col > 6)
+	if (top_of_row < 0 || top_of_row > 5 || col < 0 || col > 6)
 	{
 		printf(ERR_INVALID_MOVE);
 		set_player_turn(get_next_player_turn());	
