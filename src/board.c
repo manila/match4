@@ -37,7 +37,6 @@ void	draw_board(void)
 		while (col < 7) 
 		{
 
-			/* printf("row: %i, col: %i, int: %i", row, col, GAME_BOARD[row][col]); */
 			if (GAME_BOARD[row][col] != 0)
 			{
 				putchar(GAME_BOARD[row][col]);
@@ -101,9 +100,9 @@ int	 check_board_for_chains(char **board, char piece)
 	int chain_count = 0;
 
 	/* check rows */
-	for (row = 0; row < 5; row++)
-	{ 
-		for (col = 0; col < 6; col++)
+	for (row = 0; row < 6; row++)
+	{
+		for (col = 0; col < 7; col++)
 		{	
 			if (board[row][col] == piece)
 			{
@@ -119,6 +118,26 @@ int	 check_board_for_chains(char **board, char piece)
 			}
 		}	
 	}
-	
+	chain_count = 0;
+	/* check columns */
+	for (col = 0; col < 7; col++)
+	{
+		for (row = 0; row < 6; row++)
+		{
+			if (board[row][col] == piece)
+			{
+				chain_count++;
+				if (chain_count == 4)
+				{
+					return (1);
+				}	
+				
+			}
+			else
+			{
+				chain_count = 0;
+			}
+		}
+	}
 	return (0);
 }
