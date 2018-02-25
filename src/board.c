@@ -1,15 +1,18 @@
 #include "match4.h"
 
-char *ERR_INVALID_MOVE = "Invalid Move.\n\0";
+char 	*ERR_INVALID_MOVE = "Invalid Move.\n\0";
+char	**GAME_BOARD; 
 
-char GAME_BOARD[6][7] = {
-			{0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0},
-			{0, 0, 0, 0, 0, 0, 0},
-			};
+void	init_board(void)
+{
+	int	i;
+	GAME_BOARD = (char **) malloc(7 * sizeof(char *));
+
+	for (i = 0; i < 6; i++)
+	{
+		GAME_BOARD[i] = (char *) malloc(6 * sizeof(char));	
+	}
+}
 
 void	draw_board(void)
 {
@@ -51,6 +54,11 @@ void	draw_board(void)
 	}
 }
 
+char	**get_current_board(void)
+{
+	return(GAME_BOARD);
+}
+
 int	get_top_of_stack(int col)
 {
 	int i;
@@ -85,4 +93,32 @@ void	insert_onto_stack(int col, char piece)
 	{
 		GAME_BOARD[top_of_row][col] = piece; 
 	}
+}
+
+int	 check_board_for_chains(char **board, char piece)
+{
+	int row, col;
+	int chain_count = 0;
+
+	/* check rows */
+	for (row = 0; row < 5; row++)
+	{ 
+		for (col = 0; col < 6; col++)
+		{	
+			if (board[row][col] == piece)
+			{
+				chain_count++;
+				if (chain_count == 4)
+				{
+					return (1);
+				}
+			}
+			else
+			{
+				chain_count = 0;
+			}
+		}	
+	}
+	
+	return (0);
 }
