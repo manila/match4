@@ -66,7 +66,7 @@ int	get_top_of_stack(int col)
 
 	if (i < 6 && col < 7)
 	{
-		while (GAME_BOARD[i][col] && i < 6 && col < 7)
+		while (GAME_BOARD[i][col] && i < 5 && col < 7)
 		{
 			i++;
 		}
@@ -139,5 +139,6 @@ int	 check_board_for_chains(char **board, char piece)
 			}
 		}
 	}
+
 	return (0);
 }

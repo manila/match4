@@ -4,7 +4,7 @@ int	GAME_OVER = 0;
 
 void	start_game()
 {
-	int player_input = 0;
+	char player_input[256];
 	
 	init_board();
 
@@ -14,8 +14,8 @@ void	start_game()
 	{
 		set_player_turn(get_next_player_turn());	
 		printf("\nPlayer %c's Turn: Enter row number to place piece: ", get_player_piece());
-		scanf("%i", &player_input);
-		insert_onto_stack(player_input - 1, get_player_piece());
+		scanf("%255s", player_input);
+		insert_onto_stack(player_input[0] - 49, get_player_piece());
 		draw_board();
 		if (check_board_for_chains(get_current_board(), get_player_piece()) == 1)
 		{
