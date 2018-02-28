@@ -64,13 +64,13 @@ int	get_top_of_stack(int col)
 	
 	i = 0;
 
+	while (i < 6 && GAME_BOARD[i][col] && col < 7)
+	{
+		i++;
+	}
+
 	if (i < 6 && col < 7)
 	{
-		while (GAME_BOARD[i][col] && i < 5 && col < 7)
-		{
-			i++;
-		}
-	
 		return (i);
 	}
 	else
