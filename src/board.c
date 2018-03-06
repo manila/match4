@@ -139,6 +139,28 @@ int	 check_board_for_chains(char **board, char piece)
 			}
 		}
 	}
-
+	chain_count = 0;
+	/* check diagonal right to left on drawn board */
+	
+	for (col = 0, row = 0; col < 7 && row < 6; col++, row++)
+	{
+		if (board[row][col] == piece)
+		{
+			chain_count++;
+			if (chain_count == 4)
+			{
+				return (1);
+			}
+		}
+		else
+		{
+			chain_count = 0;
+		}
+	}
 	return (0);
+}
+
+int	check_diag_chains()
+{
+	
 }
