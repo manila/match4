@@ -1,20 +1,34 @@
 #include "match4.h"
 
-char 	*ERR_INVALID_MOVE = "Invalid Move.\n\0";
-char	**GAME_BOARD; 
+/* Create and return a multi-dimentional array */
+static char **init_board(void);
 
-void	init_board(void)
+char 	*ERR_INVALID_MOVE = "Invalid Move.\n\0";
+
+Game	*create_game(void)
+{
+	Game *game = malloc(sizeof(game));
+
+	game->board = init_board();	
+	game->game_over = 0;
+
+	return (game);
+}
+
+static char **init_board(void)
 {
 	int	i;
-	GAME_BOARD = (char **) malloc(7 * sizeof(char *));
+	char **board = (char **) malloc(7 * sizeof(char *));
 
 	for (i = 0; i < 6; i++)
 	{
-		GAME_BOARD[i] = (char *) malloc(6 * sizeof(char));	
+		board[i] = (char *) malloc(6 * sizeof(char));	
 	}
+
+	return (board);
 }
 
-void	draw_board(void)
+void	draw_board(char **board)
 {
 	int row, col, i;
 
@@ -37,9 +51,9 @@ void	draw_board(void)
 		while (col < 7) 
 		{
 
-			if (GAME_BOARD[row][col] != 0)
+			if (board[row][col] != 0)
 			{
-				putchar(GAME_BOARD[row][col]);
+				putchar(board[row][col]);
 			}
 			else
 			{
@@ -53,18 +67,18 @@ void	draw_board(void)
 	}
 }
 
-char	**get_current_board(void)
+char	**get_current_board(Game *game)
 {
-	return(GAME_BOARD);
+	return(game->board);
 }
 
-int	get_top_of_stack(int col)
+int	get_top_of_stack(char **board,int col)
 {
 	int i;
 	
 	i = 0;
 
-	while (i < 6 && GAME_BOARD[i][col] && col < 7)
+	while (i < 6 && board[i][col] && col < 7)
 	{
 		i++;
 	}
@@ -79,9 +93,9 @@ int	get_top_of_stack(int col)
 	}
 }
 
-void	insert_onto_stack(int col, char piece)
+void	insert_onto_stack(char **board, int col, char piece)
 {
-	int top_of_row = get_top_of_stack(col);
+	int top_of_row = get_top_of_stack(board, col);
 	
 	if (top_of_row < 0 || top_of_row > 5 || col < 0 || col > 6)
 	{
@@ -90,7 +104,7 @@ void	insert_onto_stack(int col, char piece)
 	}
 	else
 	{
-		GAME_BOARD[top_of_row][col] = piece; 
+		board[top_of_row][col] = piece; 
 	}
 }
 
@@ -162,5 +176,5 @@ int	 check_board_for_chains(char **board, char piece)
 
 int	check_diag_chains()
 {
-	
+	return (0);	
 }
