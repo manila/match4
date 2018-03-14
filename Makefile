@@ -1,6 +1,7 @@
 TARGET = match4
 CC = gcc
-CFLAGS = -Wall -Wextra
+STD = -std=c99
+CFLAGS = -Wall -Wextra -Werror
 INC = -I ./include
 FILES = $(wildcard ./src/*.c)
 
@@ -17,4 +18,4 @@ fclean: clean
 re: fclean all
 
 $(TARGET): $(FILES)
-	@$(CC) $(INC) $(CFLAGS) $(FILES) -o $(TARGET)
+	@$(CC) $(STD) $(INC) $(CFLAGS) $(FILES) -o $(TARGET)
