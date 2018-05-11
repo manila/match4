@@ -4,7 +4,7 @@ Game *init_game(void)
 {
 	Game *game = malloc(sizeof(Game));
 
-	game->board_x = 0x8102040813333;
+	game->board_x = 0x40810204081;
 	game->board_o = 1;
 	game->col_mask = 127;
 	game->game_over = 0;
@@ -22,7 +22,7 @@ void	print_board(Game *game)
 	{
 		for (row = 0; row < rows + 1; row++)
 		{
-			printf("%d", (int) (full_board & (bitmask << ((row * cols) + (cols - 1) - (col)))) > 0 ? 1 : 0);  
+			printf("%d", (int) ((full_board & (bitmask << ((row * cols) + (cols - 1) - (col)))) > 0 ? 1 : 0));  
 		}
 		putchar('\n');
 	}
