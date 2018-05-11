@@ -1,7 +1,7 @@
 TARGET = match4
 CC = gcc
 STD = -std=c99
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 INC = -I ./include
 FILES = $(wildcard ./src/*.c)
 
