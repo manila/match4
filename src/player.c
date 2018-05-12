@@ -19,7 +19,7 @@ unsigned char	set_player_turn(unsigned char player)
 
 unsigned char	get_next_player_turn()
 {
-	return ((~PLAYER_TURN) & 0x01);
+	return ((~PLAYER_TURN) & 1);
 }
 
 char	get_player_piece(void)

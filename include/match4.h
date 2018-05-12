@@ -6,17 +6,18 @@
 # include <stdlib.h>
 # include <stdint.h>
 
+
 typedef struct {
-	uint64_t board_x;
-	uint64_t board_o;
+	int	 board_count;
+	uint64_t board[2];
 	uint64_t col_mask;
-	int  game_over;
+	int	 game_over;
 } Game;
 
 Game		*init_game(void);
 void		start_game(void);
 void		print_board(Game *game);
-void		insert_onto_stack(Game *game, int col);
+void		insert_onto_stack(Game *game, int col, int player);
 unsigned char	set_player_turn(unsigned char player);
 unsigned char	get_player_turn(void);
 unsigned char	get_next_player_turn(void);
