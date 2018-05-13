@@ -23,6 +23,6 @@ unsigned char	get_player_turn(void);
 unsigned char	get_next_player_turn(void);
 char		get_player_piece(void);
 char		**get_current_board(Game *game);
-int		check_board_for_chains(void);
+int		check_board_for_win(Game *game, int player);
 
 #endif

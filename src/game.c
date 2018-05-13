@@ -17,5 +17,7 @@ void	start_game()
 		scanf("%255s", player_input);
 		insert_onto_stack(game, (atoi(player_input) - 1), get_player_turn());
 		print_board(game);
+		if (check_board_for_win(game, get_player_turn()))
+			game->game_over = 1;
 	}
 }

@@ -7,9 +7,9 @@ Game *init_game(void)
 	Game *game = malloc(sizeof(Game));
 
 	game->board_count = 2;
-	game->board[0] = 0x40810204081;
-	game->board[1] = 0x40810204081;
-	game->col_mask = 127;
+	game->board[0] = 0x0101010101010101LL;
+	game->board[1] = 0x0101010101010101LL;
+	game->col_mask = 255;
 	game->game_over = 0;
 	
 	return (game);
@@ -22,7 +22,7 @@ uint64_t get_full_board(Game *game)
 
 void	print_board(Game *game)
 {
-	int col, row, cols = 7, rows = 6;
+	int col, row, cols = 8, rows = 7;
 	uint64_t fb = get_full_board(game);
 	uint64_t bitmask = 1;
 	
@@ -37,7 +37,7 @@ void	print_board(Game *game)
 
 	row = 6;
 
-	while (row)
+	while (row > -1)
 	{
 		print_row(game, row);
 		row--;
@@ -46,9 +46,10 @@ void	print_board(Game *game)
 
 void	print_row(Game *game, int row)
 {
+	int cols = 7;
 	uint64_t bitmask = (1 << row);
 	
-	while (bitmask)
+	while (bitmask && cols)
 	{
 		if ((game->board[0] & bitmask) > 0)
 			putchar('x');
@@ -56,8 +57,8 @@ void	print_row(Game *game, int row)
 			putchar('o');
 		else
 			putchar('.');
-
-		bitmask <<= 7;
+		bitmask <<= 8;
+		cols--;
 	}	
 	putchar('\n');
 }
@@ -71,17 +72,12 @@ void	insert_onto_stack(Game *game, int col, int player)
 {
 	uint64_t fb = get_full_board(game);
 
-	printf("Player Number: %d\n", player);	
-
-	game->board[player] |= ((~fb) & (game->col_mask << (col * 7))) & (fb << 1);
+	game->board[player] |= (~fb) & ((game->col_mask << (col * 8))) & (fb << 1);
 } 
 
-int	 check_board_for_chains(void)
+int	 check_board_for_win(Game *game, int player)
 {
-	return (0);
-}
+	uint64_t bb = game->board[player];
 
-int	check_diag_chains(void)
-{
-	return (0);	
+	return (bb << 1) & (bb << 2) & (bb << 3) & (bb << 4);
 }
