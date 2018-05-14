@@ -10,6 +10,7 @@
 typedef struct {
 	int	 board_count;
 	uint64_t board[2];
+	uint64_t bottom_mask;
 	uint64_t col_mask;
 	int	 game_over;
 } Game;
@@ -23,6 +24,7 @@ unsigned char	get_player_turn(void);
 unsigned char	get_next_player_turn(void);
 char		get_player_piece(void);
 char		**get_current_board(Game *game);
-int		check_board_for_win(Game *game, int player);
+uint64_t	check_board_for_win(Game *game, int player);
+void		print_board_debug(uint64_t board, char *board_type);
 
 #endif
