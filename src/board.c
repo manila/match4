@@ -6,9 +6,10 @@ Game *init_game(void)
 {
 	Game *game = malloc(sizeof(Game));
 
+	game->player_piece = "xo";
 	game->board_count = 2;
-	game->board[0] = 0x0101010101010101LL;
-	game->board[1] = 0x0101010101010101LL;
+	game->board[0] = 0;
+	game->board[1] = 0;
 	game->col_mask = 255;
 	game->bottom_mask = 0x0101010101010101LL;
 	game->game_over = 0;
@@ -41,15 +42,43 @@ void	print_board_debug(uint64_t board, char *board_type)
 	puts("---end---");
 }
 
+void	print_cell(char let)
+{
+	if (let)
+	{
+		putchar(let);
+	};
+	putchar('|');
+}
+
+void	print_number_row(void)
+{
+	int col = 1;
+
+	print_cell(0);
+
+	while (col < 8)
+	{
+		print_cell(col + '0');
+		col++;
+	}
+	
+	putchar('\n');
+}
+
 void	print_board(Game *game)
 {
 	int row = 6;
 
-	while (row > -1)
+	print_number_row();
+
+	while (row)
 	{
 		print_row(game, row);
 		row--;
 	}
+
+	printf("\n Test: %d \n", sizeof(game->board));
 }
 
 void	print_row(Game *game, int row)
@@ -57,17 +86,28 @@ void	print_row(Game *game, int row)
 	int cols = 7;
 	uint64_t bitmask = (1 << row);
 	
+	print_cell(0);
+
 	while (bitmask && cols)
 	{
+
 		if ((game->board[0] & bitmask) > 0)
-			putchar('x');
+		{
+			print_cell(game->player_piece[0]);
+		}
 		else if ((game->board[1] & bitmask) > 0)
-			putchar('o');
+		{
+			print_cell(game->player_piece[1]);
+		}
 		else
-			putchar('.');
+		{
+			print_cell('.');
+		}
+
 		bitmask <<= 8;
 		cols--;
 	}	
+
 	putchar('\n');
 }
 
@@ -80,10 +120,9 @@ void	insert_onto_stack(Game *game, int col, int player)
 {
 	uint64_t fb = get_full_board(game);
 
+	fb |= game->bottom_mask;
+
 	game->board[player] |= (~fb) & ((game->col_mask << (col * 8))) & (fb << 1);
-	
-	print_board_debug(game->board[0], "Player 1");
-	print_board_debug(game->board[1], "Player 2");
 } 
 
 uint64_t check_board_for_win(Game *game, int player)

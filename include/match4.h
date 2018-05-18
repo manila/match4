@@ -8,6 +8,7 @@
 
 
 typedef struct {
+	char 	*player_piece;
 	int	 board_count;
 	uint64_t board[2];
 	uint64_t bottom_mask;
