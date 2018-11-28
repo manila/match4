@@ -11,5 +11,6 @@ Enter the number of the column you want to drop your piece, then allow the secon
 
 ## TODO
 
-- Comment Code
-- Malloc null pointer checks
+- Comments!
+- Better error checking for bad player input
+- ~~Malloc null pointer checks~~
