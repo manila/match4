@@ -6,6 +6,12 @@ Game *init_game(void)
 {
 	Game *game = malloc(sizeof(Game));
 
+	if (game == NULL)
+	{
+		printf("Memory allocation failed");
+		exit(-1);
+	}
+
 	game->player_piece = "xo";
 	game->board_count = 2;
 	game->board[0] = 0;
@@ -13,8 +19,9 @@ Game *init_game(void)
 	game->col_mask = 255;
 	game->bottom_mask = 0x0101010101010101LL;
 	game->game_over = 0;
-	
+
 	return (game);
+	
 }
 
 uint64_t get_full_board(Game *game)
