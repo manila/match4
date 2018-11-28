@@ -78,7 +78,6 @@ void	print_board(Game *game)
 		row--;
 	}
 
-	printf("\n Test: %d \n", sizeof(game->board));
 }
 
 void	print_row(Game *game, int row)
