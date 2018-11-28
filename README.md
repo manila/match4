@@ -8,3 +8,8 @@ The generic [worse] version of Connect 4 in C
 ## Playing
 
 Enter the number of the column you want to drop your piece, then allow the second player to do the same. First one to get 4 in a row vertically, horizontally, or diagonally wins!
+
+## TODO
+
+- Comment Code
+- Malloc null pointer checks
