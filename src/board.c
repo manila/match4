@@ -2,6 +2,7 @@
 
 void print_row(Game *game, int row);
 
+/* Start game, allocate memory for game struct */
 Game *init_game(void)
 {
 	Game *game = malloc(sizeof(Game));
@@ -24,11 +25,13 @@ Game *init_game(void)
 	
 }
 
+/* Return both players bitboards combined into one */
 uint64_t get_full_board(Game *game)
 {
 	return (game->board[0] | game->board[1]);		
 }
 
+/* Debug function to print bitboard */
 void	print_board_debug(uint64_t board, char *board_type)
 {
 	int col, row, cols = 8, rows = 7;
@@ -49,6 +52,7 @@ void	print_board_debug(uint64_t board, char *board_type)
 	puts("---end---");
 }
 
+/* Print board 'cell' seperator */
 void	print_cell(char let)
 {
 	if (let)
