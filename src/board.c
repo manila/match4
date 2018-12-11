@@ -62,6 +62,7 @@ void	print_cell(char let)
 	putchar('|');
 }
 
+/* Print number of row */
 void	print_number_row(void)
 {
 	int col = 1;
